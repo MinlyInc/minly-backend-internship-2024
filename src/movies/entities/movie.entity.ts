@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { Url } from "url";
+import { Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 @Entity()
 export class Movie {
@@ -16,5 +15,5 @@ export class Movie {
   rating: number;
 
   @Column()
-  img: Url;
+  img: string;
 }
