@@ -1,6 +1,7 @@
 import { generateUuid7 } from "src/utils/uuid7";
-import { Entity, PrimaryGeneratedColumn, Column, Timestamp, BeforeInsert, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, Timestamp, BeforeInsert, ManyToOne, ManyToMany } from "typeorm"
 import { Director } from "./director.entity";
+import { Actor } from "./actor.entity";
 
 @Entity()
 export class Movie {
@@ -37,6 +38,9 @@ export class Movie {
     @ManyToOne(() => Director, director => director.movies)
     director: Director;
 
+
+    @ManyToMany(() => Actor, actor => actor.movies)
+    actor: Actor[];
 
     @BeforeInsert()
   generateId() {

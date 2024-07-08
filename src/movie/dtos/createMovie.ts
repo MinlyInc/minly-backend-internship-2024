@@ -1,4 +1,5 @@
 export class CreateDto{
-    name:string;
+    title:string;
     releaseDate:string;
+    
 }
