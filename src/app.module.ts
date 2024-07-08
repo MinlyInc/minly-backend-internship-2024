@@ -4,7 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HealthModule } from './health/health.module';
-import { MoviesModule } from './movies/movies.module';
+import { MovieModule } from './movie/movie.module';
+import { DirectorModule } from './director/director.module';
+import { ActorModule } from './actor/actor.module';
 import typeorm from './config/typeorm';
 
 
@@ -18,7 +20,9 @@ import typeorm from './config/typeorm';
       useFactory: async (configService: ConfigService) => (configService.get('typeorm'))
     }),
     HealthModule,
-    MoviesModule,
+    MovieModule,
+    DirectorModule,
+    ActorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
