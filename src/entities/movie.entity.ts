@@ -1,7 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, ManyToOne, JoinColumn, BeforeInsert } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { Director } from './director.entity';
 import { Actor } from './actor.entity';
+import { Festival } from './festival.entity';
+
 
 @Entity()
 export class Movie {
@@ -26,15 +28,15 @@ export class Movie {
   @UpdateDateColumn({ type: 'timestamptz' })
   updated_at: Date;
 
-  @ManyToOne(() => Director, director => director.movies)
-  @JoinColumn({ name: 'director_id' })
-  director: Director;
-
-  @Column({ unique: true })
+  @Column({ unique: true, type: 'uuid' })
   uuid: string;
 
   @Column({ nullable: true })
   trailer: string;
+
+  @ManyToOne(() => Director, director => director.movies)
+  @JoinColumn({ name: 'director_id' })
+  director: Director;
 
   @ManyToMany(() => Actor, actor => actor.movies)
   @JoinTable({
@@ -44,8 +46,13 @@ export class Movie {
   })
   actors: Actor[];
 
+  @ManyToMany(() => Festival, festival => festival.movies)
+  festivals: Festival[];
+
   @BeforeInsert()
   generateUUID() {
-    this.uuid = uuidv4();
+    if (!this.uuid) {
+      this.uuid = uuidv4();
+    }
   }
 }
