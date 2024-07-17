@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Movie } from 'src/entities/movie.entity';
 import { Director } from 'src/entities/director.entity';
+import { format } from 'date-fns';
 
 @Injectable()
 export class MovieService {
@@ -37,23 +38,35 @@ export class MovieService {
       .take(limit)
       .getManyAndCount();
 
-    return {
-      data: result,
-      total,
-      page,
-      lastPage: Math.ceil(total / limit),
-    };
-  }
+      const formattedResult = result.map(movie => ({
+        ...movie,
+        release_date: format(new Date(movie.release_date), 'yyyy')
+      }));
+
+      return {
+        data: formattedResult,
+        total,
+        page,
+        lastPage: Math.ceil(total / limit),
+      };
+    }
 
   findOne(id: number) {
     return this.movieRepository.findOne({ where: { id }, relations: ['director'] });
   }
 
   async search(searchTerm: string) {
-    return this.movieRepository.createQueryBuilder('movie')
+    const result = await this.movieRepository.createQueryBuilder('movie')
       .leftJoinAndSelect('movie.director', 'director')
       .where('movie.title ILIKE :searchTerm', { searchTerm: `%${searchTerm}%` })
       .getMany();
+  
+    const formattedResult = result.map(movie => ({
+      ...movie,
+      release_date: format(new Date(movie.release_date), 'yyyy')
+    }));
+  
+    return formattedResult;
   }
 
   async update(id: number, updateMovieDto: UpdateMovieDto) {
