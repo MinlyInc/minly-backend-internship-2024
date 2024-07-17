@@ -16,9 +16,6 @@ export class Director extends AutoTimestamp {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
 
-  @Column({ type: 'varchar', length: 255, nullable: false })
-  title: string;
-
   @Column({ type: 'enum', enum: Gender })
   gender: string;
 
@@ -36,9 +33,6 @@ export class Director extends AutoTimestamp {
 
   @Column({ type: 'varchar', nullable: true })
   nationality: string;
-
-  @Column({ type: 'varchar', length: 1000, nullable: true })
-  trailer: string;
 
   @Column({ type: 'bigint', nullable: true })
   numberOfAward: Number;
