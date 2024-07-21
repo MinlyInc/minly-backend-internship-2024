@@ -17,6 +17,11 @@ export class MovieService {
  return await this.movieRepo.save(movie)
     }
 
+
+    async getMovieById(uuid:string):Promise<Movie>{
+      return await this.movieRepo.findOne({where:{uuid}})
+    }
+
     getAllMovies(query:string ):Promise<Movie[]>{
   
        return this.movieRepo.find()

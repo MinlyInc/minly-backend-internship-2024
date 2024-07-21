@@ -3,6 +3,8 @@ import { Entity, PrimaryGeneratedColumn, Column, Timestamp, BeforeInsert, ManyTo
 import { Director } from "./director.entity";
 import { Actor } from "./actor.entity";
 import { Festival } from "./festival.entity";
+import { Writer } from "./writer.entity";
+import { writer } from "repl";
 
 @Entity()
 export class Movie {
@@ -33,6 +35,12 @@ export class Movie {
     @Column({type:'varchar',length:1000,nullable:true})
     trailer:string;
 
+    @Column({ type: 'text', nullable: true })
+    overview: string; 
+
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    genre: string; 
+
     @Column({type:'varchar'})
     uuid: string;
 
@@ -44,6 +52,11 @@ export class Movie {
 
     @ManyToMany(() => Actor, actor => actor.movies)
     actor: Actor[];
+
+    @ManyToMany(()=>Writer,writer=>writer.movies )
+    writer: Writer[]
+
+
 
     @BeforeInsert()
   generateId() {

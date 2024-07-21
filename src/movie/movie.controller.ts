@@ -11,6 +11,13 @@ export class MovieController {
     constructor(private movieService : MovieService){}
 
 
+   @Get(':uuid')
+
+   async getMovie(@Param('uuid')uuid:string):Promise<Movie>{
+       return this.movieService.getMovieById(uuid)
+   }
+
+
     @Get()
     async getAllMovies(@Query() PaginationDto:PaginationDto ){
       // this.movieService.getAllMovies(query);

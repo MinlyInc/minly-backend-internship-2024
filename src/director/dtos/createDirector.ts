@@ -19,7 +19,6 @@ export class CreateDirectorDto{
     @IsOptional()
     picture?: string;
   
-    @IsDate()
     @IsOptional()
     birthDate?: Date;
   

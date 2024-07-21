@@ -9,15 +9,31 @@ import typeorm from './config/typeorm';
 import { MovieController } from './movie/movie.controller';
 import { MovieService } from './movie/movie.service';
 import { DirectorModule } from './director/director.module';
+import { RouterModule } from '@nestjs/core';
 
 @Module({
   imports: [
+
+
     ConfigModule.forRoot({ isGlobal: true, load: [typeorm] }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) =>
         configService.get('typeorm'),
     }),
+MovieModule,
+    // RouterModule.register([
+    //   {
+    //     path: 'movie',
+    //     module: MovieModule,
+    //     children:[
+    //       {
+    //         path:'movie/:id'
+    //       }
+    //     ]
+    //   },
+    // ]),
+    
     HealthModule,
     DirectorModule,
     MovieModule,
