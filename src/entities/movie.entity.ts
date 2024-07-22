@@ -34,9 +34,25 @@ export class Movie {
   @Column({ nullable: true })
   trailer: string;
 
+  @Column({nullable:true})
+  duration:string;
+
+  @Column({nullable:true})
+  overview:string;
+
+  @Column({nullable:true})
+  language:string;
+
+  @Column("text", { array: true, default: [] })
+  genres: string[];
+
   @ManyToOne(() => Director, director => director.movies)
   @JoinColumn({ name: 'director_id' })
   director: Director;
+
+  @ManyToOne(() => Director, writer => writer.movies, { nullable: true })
+  @JoinColumn({ name: 'writer_id' })
+  writer: Director;
 
   @ManyToMany(() => Actor, actor => actor.movies)
   @JoinTable({

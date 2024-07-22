@@ -5,5 +5,11 @@ export class CreateMovieDto {
     average_rating?: number;
     trailer?: string;
     directorId: number;
+    actorIds: string[];
+    duration?: string;
+    overview?: string;
+    language?: string;
+    genres: string[];
+    writerId?:number;
   }
   

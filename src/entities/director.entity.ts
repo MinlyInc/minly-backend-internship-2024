@@ -35,6 +35,9 @@ export class Director {
   @Column({ type: 'bigint', nullable: true })
   number_of_awards: number;
 
+  @Column({ type: 'enum', enum: ['director', 'writer'], default: 'director' })
+  type: 'director' | 'writer';
+
   @CreateDateColumn({ type: 'timestamptz' })
   created_at: Date;
 
