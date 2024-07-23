@@ -30,7 +30,4 @@ export class CreateDirectorDto{
     @IsOptional()
     numberOfAward?: number;
   
-    @IsUUID()
-    @IsOptional()
-    uuid?: string;
   }

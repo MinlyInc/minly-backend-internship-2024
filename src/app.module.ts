@@ -10,6 +10,8 @@ import { MovieController } from './movie/movie.controller';
 import { MovieService } from './movie/movie.service';
 import { DirectorModule } from './director/director.module';
 import { RouterModule } from '@nestjs/core';
+import { ActorModule } from './actor/actor.module';
+import { WriterModule } from './writer/writer.module';
 
 @Module({
   imports: [
@@ -37,6 +39,9 @@ MovieModule,
     HealthModule,
     DirectorModule,
     MovieModule,
+    ActorModule,
+    WriterModule,
+    
   ],
   controllers: [AppController],
   providers: [AppService],

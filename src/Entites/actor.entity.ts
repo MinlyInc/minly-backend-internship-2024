@@ -12,6 +12,7 @@ import {
 import { Gender } from './gender.enum';
 import { AutoTimestamp } from './auto-time-stamp';
 import { Movie } from './movie.entity';
+import { actorMoviesMovie } from './movie-actor-actor.entity';
 
 @Entity()
 export class Actor extends AutoTimestamp {
@@ -23,6 +24,9 @@ export class Actor extends AutoTimestamp {
 
   @Column({ type: 'varchar', nullable: false })
   firstName: string;
+
+  @Column({ type: 'varchar', length: 1000 ,nullable:true})
+  bio?: string;
 
   @Column({ type: 'varchar', nullable: false })
   lastName: string;
@@ -42,12 +46,16 @@ export class Actor extends AutoTimestamp {
   @Column({ type: 'varchar' })
   uuid: string;
 
-  @ManyToMany(() => Movie, movie => movie.actor)
-  @JoinTable()
-  movies: Movie[];
+  // @ManyToMany(() => Movie, (movie) => movie.actor)
+  // @JoinTable()
+  // movies: Movie[];
+
+  @OneToMany(() => actorMoviesMovie, (movieActorActor) => movieActorActor.actor)
+  movieActorActors: actorMoviesMovie[];
 
   @BeforeInsert()
   generateUuid7() {
     this.uuid = generateUuid7();
+    console.log('sss');
   }
 }

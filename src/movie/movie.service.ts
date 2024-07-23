@@ -5,12 +5,15 @@ import { ILike, Repository } from 'typeorm';
 import { CreateMovieDto } from './dtos/createMovie';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationDto } from './dtos/PaginationDto';
+import { Director } from 'src/Entites/director.entity';
 
 @Injectable()
 export class MovieService {
     constructor(
         @InjectRepository(Movie)
         private movieRepo: Repository<Movie>,
+        @InjectRepository(Director)
+        private directorRepository: Repository<Director>,
       ) {}
    async createMovie(dto:CreateMovieDto):Promise<Movie>{
  const movie= this.movieRepo.create(dto)
@@ -19,7 +22,7 @@ export class MovieService {
 
 
     async getMovieById(uuid:string):Promise<Movie>{
-      return await this.movieRepo.findOne({where:{uuid}})
+      return await this.movieRepo.findOne({where:{uuid},  relations:['movieActorActors','director','movieActorActors.actor']})
     }
 
     getAllMovies(query:string ):Promise<Movie[]>{
