@@ -22,4 +22,8 @@ export class ActorService {
   async getAllActor(): Promise<Actor[]> {
     return this.actorRepository.find();
   }
+
+  async getActorByUuid(uuid:string):Promise<Actor>{
+    return this.actorRepository.findOne({where:{uuid},  relations:['movieActorActors.movie']})
+  }
 }
