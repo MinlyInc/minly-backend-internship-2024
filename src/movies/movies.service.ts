@@ -12,7 +12,6 @@ export class MoviesService {
         return this.movieRepository.createMovie(movieData) ;
     }
 
-
     private convertSortByQueryParamToHaveSameFormAsDatabaseSchema(value : string | undefined) : string | undefined{
         // first check query parameter sort by is provided in the url ot not.
         // if provided convert it to have the same form of database schema.
@@ -31,7 +30,6 @@ export class MoviesService {
         return sortBy ;
     }
 
-
     private convertSortOrderQueryParamToHaveSameFormAsDatabaseSchema(value) : 'ASC' | 'DESC'  {
         // convert sort to be in upper-case as typeorm must be upper-case to do orderby.
         // make default sorting is to get items in desc order.
@@ -42,7 +40,6 @@ export class MoviesService {
 
     public async getMoviesByLimitAndOffesetAndFilterBy(sortMovieWithOffsetDto : SortAndFilterAndPaginateMovieDto  ): Promise<{ movies: Partial<Movie[]>; totalNumberOfPages: number }>
     {
-
         // check its a valid offset or not.
         let offset : number = sortMovieWithOffsetDto.offset === undefined ? 0 : parseInt(sortMovieWithOffsetDto.offset) ;
         if(isNaN(offset)){
@@ -64,13 +61,64 @@ export class MoviesService {
         }
 
         const {movies, totalCount} =  await this.movieRepository.getMoviesByLimitAndOffesetAndFilterBy(limit , offset , sortBy , sortOrder, sortMovieWithOffsetDto.filterValue) ;
-
+        
         // apply logic to calculate page based on limit
         const totalNumberOfPages = Math.ceil(totalCount / limit) - 1;
 
         return {movies , totalNumberOfPages} ;
     }
 
+    private concatenateFirstAndLastName(object : any){
+        return  object?.map(({ first_name, last_name, ...rest }) => ({
+            ...rest,
+            name: `${first_name} ${last_name}`
+          }));
+    }
 
+    public async getMovieDetails(movieUUID : string){
+        const movieData = await this.movieRepository.getMovieDetails(movieUUID);
+
+        if (movieData) {
+          const { uuid, poster, title, average_rating, release_date, trailer, director , categories , writers, language,  movieActors ,overview} = movieData;
+    
+          const updatedActors = movieActors.map(movieActor => ({
+            character: movieActor.character,
+            name: `${movieActor.actor.first_name} ${ movieActor.actor.last_name}`,
+            uuid: movieActor.actor.uuid,
+          }));
+          
+          const updatedWriters = this.concatenateFirstAndLastName(writers) ;
+    
+          const { first_name: directorFirstName, last_name: directorLastName, ...restDirector } = director || {};
+          const updatedDirector = director
+            ? {
+                ...restDirector,
+                name: `${directorFirstName} ${directorLastName}`
+              }
+            : null;
+            
+          const updatedMovieData = {
+            movie:{
+                uuid,
+                poster,
+                title,
+                average_rating,
+                release_date,
+                trailer,
+                overview,
+            },
+            actors: updatedActors,
+            director: updatedDirector,
+            categories:categories,
+            writers: updatedWriters,
+            language: language,
+
+          };
+    
+          return updatedMovieData;
+        }
+    
+        return movieData;
+    }
 
 }

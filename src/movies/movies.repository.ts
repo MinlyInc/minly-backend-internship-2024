@@ -64,5 +64,42 @@ export class MoviesRepository {
   
     return { movies, totalCount };
   }
+
+
+
+  public async getMovieDetails(movieUUID : string){
+    const data = await this.movieRepository.createQueryBuilder('movie')
+    .leftJoinAndSelect('movie.director', 'director')
+    .leftJoinAndSelect('movie.movieActors', 'movieActor')
+    .leftJoinAndSelect('movieActor.actor', 'actor')
+    .leftJoinAndSelect('movie.categories', 'category')
+    .leftJoinAndSelect('movie.language' , 'language')
+    .leftJoinAndSelect('movie.writers' , 'writer')
+    .select([
+      'movie.title',
+      'movie.release_date',
+      'movie.poster',
+      'movie.average_rating',
+      'movie.trailer',
+      'movie.uuid',
+      'movie.overview',
+      'director.first_name',
+      'director.last_name',
+      'director.uuid',
+      'actor.first_name',
+      'actor.last_name',
+      'actor.uuid',
+      'category.name',
+      'language.name',
+      'movieActor.character',
+      'writer.first_name',
+      'writer.last_name',
+    ])
+    .where('movie.uuid = :uuid', { uuid: movieUUID })
+    .getOne();
+
+      return data;
+
+  }
   
 }
