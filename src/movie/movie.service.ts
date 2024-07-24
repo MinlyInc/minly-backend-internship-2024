@@ -99,7 +99,7 @@ export class MovieService {
     const result = await this.movieRepository.createQueryBuilder('movie')
       .leftJoinAndSelect('movie.director', 'director')
       .leftJoinAndSelect('movie.actors', 'actors')
-      .leftJoinAndSelect('movie_writer', 'writer')
+      .leftJoinAndSelect('movie.writer', 'writer')
       .where('movie.title ILIKE :searchTerm', { searchTerm: `%${searchTerm}%` })
       .getMany();
   
