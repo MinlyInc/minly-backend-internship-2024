@@ -25,8 +25,8 @@ export class MovieService {
   }
 
   async create(createMovieDto: CreateMovieDto) {
-    const director = await this.directorRepository.findOne({ where: { id: createMovieDto.directorId } });
-    const writer = createMovieDto.writerId ? await this.directorRepository.findOne({ where: { id: createMovieDto.writerId, type: 'writer' } }) : null;
+    const director = await this.directorRepository.findOne({ where: { uuid: createMovieDto.directorId } });
+    const writer = await this.directorRepository.findOne({ where: { uuid: createMovieDto.writerId } });
 
     const actorPromises = createMovieDto.actorIds.map(actorUuid => 
       this.actorRepository.findOne({ where: { uuid: actorUuid } })
@@ -42,7 +42,6 @@ export class MovieService {
       director,
       writer,
       actors,
-      genres: createMovieDto.genres,
       trailer: this.transformYouTubeUrl(createMovieDto.trailer),
     });
     return this.movieRepository.save(movie);
@@ -79,7 +78,7 @@ export class MovieService {
     }
 
     async findOne(id: number) {
-      const movie = await this.movieRepository.findOne({ where: { id }, relations: ['director', 'actors'] });
+      const movie = await this.movieRepository.findOne({ where: { id }, relations: ['director', 'actors', 'writer'] });
       if (!movie) {
         throw new Error('Movie not found');
       }
@@ -91,7 +90,6 @@ export class MovieService {
           last_name: actor.last_name,
           picture: actor.picture,
         })),
-        genres: movie.genres,
       };
     }
     
@@ -114,8 +112,8 @@ export class MovieService {
   }
 
   async update(id: number, updateMovieDto: UpdateMovieDto) {
-    const director = await this.directorRepository.findOne({ where: { id: updateMovieDto.directorId } });
-    const writer = updateMovieDto.writerId ? await this.directorRepository.findOne({ where: { id: updateMovieDto.writerId, type: 'writer' } }) : null;
+    const director = await this.directorRepository.findOne({ where: { uuid: updateMovieDto.directorId } });
+    const writer = await this.directorRepository.findOne({ where: { uuid: updateMovieDto.writerId } });
     const actors = await this.actorRepository.findByIds(updateMovieDto.actorIds);
     await this.movieRepository.update(id, { ...updateMovieDto, director, writer, actors });
     return this.movieRepository.findOne({ where: { id }, relations: ['director', 'actors', 'writer'] });

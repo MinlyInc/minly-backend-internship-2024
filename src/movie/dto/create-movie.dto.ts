@@ -4,12 +4,12 @@ export class CreateMovieDto {
     poster?: string;
     average_rating?: number;
     trailer?: string;
-    directorId: number;
+    directorId: string;
     actorIds: string[];
     duration?: string;
     overview?: string;
     language?: string;
-    genres: string[];
-    writerId?:number;
+    genres?: string[];
+    writerId?:string;
   }
   
