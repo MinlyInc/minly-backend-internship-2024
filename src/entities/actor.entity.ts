@@ -3,7 +3,8 @@ import { Gender } from './gender.enum';
 import { AutoTimestamp } from './auto-time-stamp';
 import { uuidv7 } from '@kripod/uuidv7';
 import { Movie } from './movie.entity';
-import { MovieActor } from './MovieActor.entity';
+import { MovieActor } from './movie-actor.entity';
+import { MovieActorAward } from './movie-actor-award.entity';
 
 
 @Entity()
@@ -38,6 +39,9 @@ export class Actor extends AutoTimestamp {
   @Column({ type: 'varchar', length: 1000, nullable: true })
   picture: string;
 
+  @Column({ type: 'float', default: 0 })
+  average_rating: number;
+
   @BeforeInsert()
   generateUUID() {
     this.uuid = uuidv7();
@@ -45,6 +49,10 @@ export class Actor extends AutoTimestamp {
 
   @OneToMany(() => MovieActor, (movieActor) => movieActor.actor)
   movieActors: MovieActor[];
+
+
+  @OneToMany(() => MovieActorAward, (movieActorAward) => movieActorAward.actor)
+  movieActorAwards: MovieActorAward[]; 
 
   
 }
