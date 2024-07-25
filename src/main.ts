@@ -23,7 +23,7 @@ async function bootstrap() {
   
 
     const config = new DocumentBuilder()
-    .setTitle('Movie Eye')
+    .setTitle('MMDB')
     .setDescription('API description')
     .setVersion('1.0')
     .build();
