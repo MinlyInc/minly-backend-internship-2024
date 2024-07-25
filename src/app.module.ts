@@ -8,6 +8,7 @@ import { DirectorsModule } from './directors/directors.module';
 import { ActorsController } from './actors/actors.controller';
 import { ActorsModule } from './actors/actors.module';
 import typeorm from './config/typeorm';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import typeorm from './config/typeorm';
     DirectorsModule,
     MoviesModule,
     ActorsModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
