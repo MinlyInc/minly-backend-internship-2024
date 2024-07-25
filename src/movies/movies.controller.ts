@@ -2,7 +2,11 @@ import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { CreateMovieDto } from './dtos/body/create-movie.dto';
 import { SortAndFilterAndPaginateMovieDto } from './dtos/query-param/sort-movie.dto';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { MovieDetailsResponse } from './swagger-model/movie-details.model';
 
+
+@ApiTags('movies')
 @Controller('movies')
 export class MoviesController {
     constructor(private movieService : MoviesService){}
@@ -20,7 +24,7 @@ export class MoviesController {
         return this.movieService.getMoviesByLimitAndOffesetAndFilterBy( sortAndFilterAndPaginateMovieDto  ) ;
     }
 
-
+    @ApiResponse({ status: 200, description: 'Get movie details', type: MovieDetailsResponse })
     @Get(':uuid')
     async getMovieDetails(
         @Param('uuid') movieUUID : string
