@@ -34,7 +34,7 @@ class Language {
   name: string;
 }
 
-class Movie {
+class MovieDetailed {
   @ApiProperty({ example: 'd4df575a-5e74-44ce-a6cb-d47c1db79894' })
   uuid: string;
 
@@ -62,8 +62,8 @@ class Movie {
 }
 
 export class MovieDetailsResponse {
-  @ApiProperty({ type: Movie })
-  movie: Movie;
+  @ApiProperty({ type: MovieDetailed })
+  movie: MovieDetailed;
 
   @ApiProperty({ type: [Actor] })
   actors: Actor[];

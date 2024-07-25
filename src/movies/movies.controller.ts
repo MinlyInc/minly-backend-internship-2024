@@ -4,6 +4,7 @@ import { CreateMovieDto } from './dtos/body/create-movie.dto';
 import { SortAndFilterAndPaginateMovieDto } from './dtos/query-param/sort-movie.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MovieDetailsResponse } from './swagger-model/movie-details.model';
+import { MovieResponse } from './swagger-model/movie.model';
 
 
 @ApiTags('movies')
@@ -17,6 +18,7 @@ export class MoviesController {
         return this.movieService.createMovie(createMovieDto) ;
     }
 
+    @ApiResponse({ status: 200, description: 'Get movies', type: MovieResponse })
     @Get()
     async getMovies(
        @Query() sortAndFilterAndPaginateMovieDto: SortAndFilterAndPaginateMovieDto,
