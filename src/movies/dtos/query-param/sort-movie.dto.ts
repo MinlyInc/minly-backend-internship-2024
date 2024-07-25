@@ -3,34 +3,34 @@ import { IsIn, IsInt, IsNotEmpty, IsOptional, IsString, Max, Min } from "class-v
 
 
 export class SortAndFilterAndPaginateMovieDto{
-    @ApiProperty()
+    @ApiProperty({ enum: ['releaseDate', 'averageRating', 'none'], required: false })
     @IsOptional()
     @IsString() 
     @IsIn(['releaseDate' , 'averageRating' , 'none'])
     sortBy? : string ;
 
 
-    @ApiProperty()
+    @ApiProperty({ enum: ['asc', 'desc'], required: false })
     @IsOptional()
     @IsString() 
     @IsIn(['asc' , 'desc'])
     sortOrder? : string ;
 
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString() 
     @IsNotEmpty()
     offset? : string ;
 
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsNotEmpty() 
     @IsString()
     limit? : string ;
 
-    @ApiProperty()
+    @ApiProperty({ required: false })
     @IsOptional()
     @IsString() 
     @IsNotEmpty()

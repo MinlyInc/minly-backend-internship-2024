@@ -38,6 +38,14 @@ export class MoviesService {
         return sortOrder ;
     }
 
+
+    private concatenateFirstAndLastName(object : any){
+        return  object?.map(({ first_name, last_name, ...rest }) => ({
+            ...rest,
+            name: `${first_name} ${last_name}`
+          }));
+    }
+
     public async getMoviesByLimitAndOffesetAndFilterBy(sortMovieWithOffsetDto : SortAndFilterAndPaginateMovieDto  ): Promise<{ movies: Partial<Movie[]>; totalNumberOfPages: number }>
     {
         // check its a valid offset or not.
@@ -68,17 +76,11 @@ export class MoviesService {
         return {movies , totalNumberOfPages} ;
     }
 
-    private concatenateFirstAndLastName(object : any){
-        return  object?.map(({ first_name, last_name, ...rest }) => ({
-            ...rest,
-            name: `${first_name} ${last_name}`
-          }));
-    }
-
     public async getMovieDetails(movieUUID : string){
         const movieData = await this.movieRepository.getMovieDetails(movieUUID);
 
         if (movieData) {
+          // re-construct json object to seprate each object from another (instead of to be nested objects) and have a shape like frontend.
           const { uuid, poster, title, average_rating, release_date, trailer, director , categories , writers, language,  movieActors ,overview} = movieData;
     
           const updatedActors = movieActors.map(movieActor => ({
