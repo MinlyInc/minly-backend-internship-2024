@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as cors from 'cors';
 
 async function bootstrap() {
 
@@ -16,7 +15,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true, // Throws an error if non-whitelisted properties are found
     }));
 
-    app.use(cors({
+    app.enableCors(({
       origin: 'http://localhost:3001', // Allow requests from this origin
       credentials: true, // Allow cookies to be sent with requests
     }));

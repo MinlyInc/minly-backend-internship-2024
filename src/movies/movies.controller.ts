@@ -2,9 +2,9 @@ import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { CreateMovieDto } from './dtos/body/create-movie.dto';
 import { SortAndFilterAndPaginateMovieDto } from './dtos/query-param/sort-movie.dto';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MovieResponse } from './swagger-model/movie.model';
-
+@ApiTags('movies')
 @Controller('movies')
 export class MoviesController {
     constructor(private movieService : MoviesService){}
