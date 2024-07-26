@@ -14,10 +14,8 @@ export class AuthController {
     @UseGuards(FirebaseAuthGuard)
     @ApiResponse({ status: 200, description: 'validate access token' })
     @ApiBearerAuth()
-    isValid(@Req() req) {
-      console.log('valid token')
-      const user = req.user; 
-      return { message: 'This is a protected route', user };
+    isValidToken(@Req() req) {
+      return { "is_valid" : true };
     }
     
 }
