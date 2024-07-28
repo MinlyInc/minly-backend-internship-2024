@@ -28,4 +28,9 @@ export class PaginationDto {
   @IsString()
   @IsIn(['title', 'releaseDate', 'averageRatings'])
   sortField?: 'title' | 'releaseDate' | 'averageRatings';
+
+  @IsOptional()
+  @IsString()
+  @IsIn(['action', 'drama', 'comedy',''])
+  Genre?: 'action' | 'drama' | 'comedy' | '';
 }

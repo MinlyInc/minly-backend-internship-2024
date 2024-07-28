@@ -46,16 +46,11 @@ export class Actor extends AutoTimestamp {
   @Column({ type: 'varchar' })
   uuid: string;
 
-  // @ManyToMany(() => Movie, (movie) => movie.actor)
-  // @JoinTable()
-  // movies: Movie[];
-
   @OneToMany(() => actorMoviesMovie, (movieActorActor) => movieActorActor.actor)
   movieActorActors: actorMoviesMovie[];
 
   @BeforeInsert()
   generateUuid7() {
     this.uuid = generateUuid7();
-    console.log('sss');
   }
 }

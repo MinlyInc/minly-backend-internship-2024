@@ -32,7 +32,7 @@ export class MovieService {
     
  
     async pagination(paginationDto: PaginationDto): Promise<{ data: Movie[], total: number }> {
-      const { page, limit, search, sortOrder, sortField } = paginationDto;
+      const { page, limit, search, sortOrder, sortField,Genre } = paginationDto;
       // const validSortFields = ['title', 'releaseDate', 'averageRatings'];
     
       const queryBuilder = this.movieRepo.createQueryBuilder('movie');
@@ -42,9 +42,12 @@ export class MovieService {
       }
   
       if (sortField) {
-        
         const order = sortOrder?.toUpperCase() as 'ASC' | 'DESC' || 'ASC';
         queryBuilder.orderBy(`movie.${sortField}`, order);
+      }
+
+      if(Genre){
+        queryBuilder.where('movie.genre = :Genre', { Genre: Genre })
       }
   
       const [data, total] = await queryBuilder
@@ -55,36 +58,4 @@ export class MovieService {
       return { data, total };
     }
     
-
-
-//     async searchMovies(query: string): Promise<Movie[]> {
-//       return this.movieRepo.find({
-//         where: {
-//           title: ILike(`%${query}%`),
-//         },
-//       });
-//     }
-//     filterMovies(genre?:string,year?:number,director?:string ,releaseYear?:string):Promise<Movie[]>{
-//      const filterCriteria:any={}
-
-
-//      if(genre){
-//       filterCriteria.genre=ILike(`%${genre}%`)
-//      }
-//      if(year){
-//       filterCriteria.year=ILike(`%${year}%`)
-//      }
-//      if(director){
-//       filterCriteria.director=ILike(`%${director}%`)
-//      }
-//      if(releaseYear){
-//       filterCriteria.releaseYear=ILike(`%${releaseYear}%`)
-//      }
-
-
-// return this.movieRepo.find({
-//    where:filterCriteria
-// })
-
-//     }
 }

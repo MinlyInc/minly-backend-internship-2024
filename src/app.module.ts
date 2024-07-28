@@ -12,6 +12,7 @@ import { DirectorModule } from './director/director.module';
 import { RouterModule } from '@nestjs/core';
 import { ActorModule } from './actor/actor.module';
 import { WriterModule } from './writer/writer.module';
+import { MovieActorModule } from './movie-actor/movie-actor.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ MovieModule,
     MovieModule,
     ActorModule,
     WriterModule,
+    MovieActorModule,
     
   ],
   controllers: [AppController],

@@ -6,6 +6,7 @@ import {
   Timestamp,
   BeforeInsert,
   OneToMany,
+  PrimaryColumn,
 } from 'typeorm';
 import { Gender } from './gender.enum';
 import { AutoTimestamp } from './auto-time-stamp';
@@ -13,7 +14,7 @@ import { Movie } from './movie.entity';
 
 @Entity()
 export class Director extends AutoTimestamp {
-  @PrimaryGeneratedColumn({ type: 'bigint' })
+  @PrimaryColumn({type:'bigint'})
   id: number;
 
   @Column({ type: 'enum', enum: Gender })
@@ -37,8 +38,8 @@ export class Director extends AutoTimestamp {
   @Column({ type: 'bigint', nullable: true })
   numberOfAward: Number;
 
-  @Column({ type: 'varchar' })
-  uuid: string;
+   @Column({ type: 'varchar' })
+     uuid: string;
 
   @OneToMany(() => Movie, (movie) => movie.director)
   movies: Movie[];
