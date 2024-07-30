@@ -3,10 +3,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  Timestamp,
   BeforeInsert,
-  OneToMany,
   ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Gender } from './gender.enum';
 import { AutoTimestamp } from './auto-time-stamp';
@@ -36,6 +35,7 @@ export class Writer extends AutoTimestamp {
   uuid: string;
 
   @ManyToMany(() => Movie, (movie) => movie.writer)
+  @JoinTable()
   movies: Movie[];
 
   @BeforeInsert()

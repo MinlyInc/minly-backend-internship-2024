@@ -17,7 +17,7 @@ export class WriterService {
     return this.writerRepository.save(writer)
     }
 
-    async getAllWriter(){
+    async getAllWriters(){
         return this.writerRepository.find()
     }
 }

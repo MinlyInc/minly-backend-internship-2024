@@ -1,4 +1,4 @@
-import { Gender } from './../Entites/gender.enum';
+
 import { Controller, Get, Param } from '@nestjs/common';
 import { MovieActorService } from './movie-actor.service';
 import { MovieActorAward } from 'src/Entites/movie-actor-award.entity';

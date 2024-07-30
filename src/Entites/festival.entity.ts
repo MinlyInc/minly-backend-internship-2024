@@ -12,7 +12,7 @@ import { Movie } from './movie.entity';
 @Entity()
 export class Festival {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  id: Number;
+  id: number;
 
   @Column({ type: 'varchar' })
   title: Date;

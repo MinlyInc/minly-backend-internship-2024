@@ -1,9 +1,7 @@
 import { generateUuid7 } from 'src/utils/uuid7';
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
-  Timestamp,
   BeforeInsert,
   OneToMany,
   PrimaryColumn,
@@ -35,7 +33,7 @@ export class Director extends AutoTimestamp {
   @Column({ type: 'varchar', nullable: true })
   nationality: string;
 
-  @Column({ type: 'bigint', nullable: true })
+  @Column({ type: 'int', nullable: true })
   numberOfAward: Number;
 
    @Column({ type: 'varchar' })

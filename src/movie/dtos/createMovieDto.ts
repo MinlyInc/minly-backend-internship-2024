@@ -2,17 +2,14 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
-  IsDate,
   IsNumber,
   IsUUID,
 } from 'class-validator';
-import { Director } from '../../Entites/director.entity'; // Adjust path as necessary
-import { Actor } from '../../Entites/actor.entity'; // Adjust path as necessary
-import { Festival } from '../../Entites/festival.entity'; // Adjust path as necessary
+import { Director } from '../../Entites/director.entity'; 
+import { Actor } from '../../Entites/actor.entity'; 
+import { Festival } from '../../Entites/festival.entity'; 
 
 export class CreateMovieDto {
-  @IsOptional()
-  id: number;
 
   @IsNotEmpty()
   @IsString()
@@ -30,21 +27,11 @@ export class CreateMovieDto {
   averageRatings?: number;
 
   @IsNotEmpty()
-  createdAt: Date;
-
-  @IsNotEmpty()
-  updatedAt: Date;
-
-  @IsNotEmpty()
   directorID: number;
 
   @IsOptional()
   @IsString()
   trailer?: string;
-
-  @IsNotEmpty()
-  @IsUUID()
-  uuid: string;
 
   director: Director;
 

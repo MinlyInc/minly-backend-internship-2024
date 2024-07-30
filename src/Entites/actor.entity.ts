@@ -3,15 +3,11 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  Timestamp,
   BeforeInsert,
   OneToMany,
-  ManyToMany,
-  JoinTable,
 } from 'typeorm';
 import { Gender } from './gender.enum';
 import { AutoTimestamp } from './auto-time-stamp';
-import { Movie } from './movie.entity';
 import { actorMoviesMovie } from './movie-actor-actor.entity';
 
 @Entity()
@@ -26,7 +22,7 @@ export class Actor extends AutoTimestamp {
   firstName: string;
 
   @Column({ type: 'varchar', length: 1000 ,nullable:true})
-  bio?: string;
+  bio: string;
 
   @Column({ type: 'varchar', nullable: false })
   lastName: string;
@@ -40,8 +36,8 @@ export class Actor extends AutoTimestamp {
   @Column({ type: 'varchar', nullable: true })
   nationality: string;
 
-  @Column({ type: 'bigint', nullable: true })
-  numberOfAward: Number;
+  @Column({ type: 'int', default:0 })
+  numberOfAwards: number;
 
   @Column({ type: 'varchar' })
   uuid: string;

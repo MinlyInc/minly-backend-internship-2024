@@ -12,14 +12,12 @@ export class ActorService {
   ) {}
 
   async CreateActor(actorDto: CreateActorDto): Promise<Actor> {
-    //   this.actorRepository.create(actorDto)
-    //   return this.actorRepository.save(actorDto)
     const actorEntity = this.actorRepository.create(actorDto);
     return this.actorRepository.save(actorEntity);
   }
 
 
-  async getAllActor(): Promise<Actor[]> {
+  async getAllActors(): Promise<Actor[]> {
     return this.actorRepository.find();
   }
 

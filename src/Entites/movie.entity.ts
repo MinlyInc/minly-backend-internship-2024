@@ -3,18 +3,16 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  Timestamp,
   BeforeInsert,
   ManyToOne,
   ManyToMany,
   OneToMany,
 } from 'typeorm';
 import { Director } from './director.entity';
-import { Actor } from './actor.entity';
 import { Festival } from './festival.entity';
 import { Writer } from './writer.entity';
-import { writer } from 'repl';
 import { actorMoviesMovie } from './movie-actor-actor.entity';
+import { Genre } from './genre.entity';
 
 @Entity()
 export class Movie {
@@ -30,7 +28,7 @@ export class Movie {
   @Column({ type: 'varchar', length: 1000, nullable: true })
   poster: string;
 
-  @Column({ type: 'float', nullable: true })
+  @Column({ type: 'float', default:0 })
   averageRatings: number;
 
   @Column({ type: 'timestamptz', nullable: false })
@@ -39,13 +37,10 @@ export class Movie {
   @Column({ type: 'timestamptz', nullable: false })
   updatedAt: Date;
 
-  @Column({ type: 'bigint', nullable: false })
-  directorID: Number;
-
   @Column({ type: 'varchar', length: 1000, nullable: true })
   trailer: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   overview: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
@@ -60,14 +55,14 @@ export class Movie {
   @ManyToMany(() => Festival, (festival) => festival.movies)
   festival: Festival[];
 
-  // @ManyToMany(() => Actor, actor => actor.movies)
-  // actor: Actor[];
-
   @OneToMany(() => actorMoviesMovie, (movieActorActor) => movieActorActor.movie)
   movieActorActors: actorMoviesMovie[];
 
   @ManyToMany(() => Writer, (writer) => writer.movies)
   writer: Writer[];
+
+  @ManyToMany(() => Genre, genre => genre.movies)
+  genres: Genre[]; 
 
   @BeforeInsert()
   generateId() {

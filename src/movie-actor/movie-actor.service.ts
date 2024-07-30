@@ -4,8 +4,7 @@ import { Actor } from 'src/Entites/actor.entity';
 import { Award } from 'src/Entites/award.entity';
 import { actorMoviesMovie } from 'src/Entites/movie-actor-actor.entity';
 import { MovieActorAward } from 'src/Entites/movie-actor-award.entity';
-import { Movie } from 'src/Entites/movie.entity';
-import { In, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class MovieActorService {
@@ -14,8 +13,6 @@ export class MovieActorService {
         private readonly movieActorAwardRepository: Repository<MovieActorAward>,
         @InjectRepository(actorMoviesMovie)
         private readonly actorMoviesMovieRepository: Repository<actorMoviesMovie>,
-        @InjectRepository(Award)
-        private readonly awardRepository: Repository<Award>,
         @InjectRepository(Actor)
     private readonly actorRepository: Repository<Actor>,
       ){}
@@ -29,10 +26,6 @@ export class MovieActorService {
         const actor = await this.actorRepository.findOne({
           where: { uuid },
         });
-    
-        if (!actor) {
-          throw new Error('Actor not found');
-        }
     
         // Find all actorMoviesMovie records for this actor
         const actorMovies = await this.actorMoviesMovieRepository.find({

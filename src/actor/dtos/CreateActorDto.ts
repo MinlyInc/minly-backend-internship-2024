@@ -9,6 +9,8 @@ export class CreateActorDto {
   @IsString()
   firstName: string;
 
+
+  @IsOptional()
   @IsString()
   bio: string;
 

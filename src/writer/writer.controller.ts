@@ -1,4 +1,3 @@
-import { writer } from 'repl';
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { WriterService } from './writer.service';
 import { CreateWriterDto } from './dto/CreateWriterDto';
@@ -13,7 +12,7 @@ export class WriterController {
     }
 
     @Get()
-    async getAllWriter():Promise<Writer[]>{
-        return this.writerService.getAllWriter();
+    async getAllWriters():Promise<Writer[]>{
+        return this.writerService.getAllWriters();
     }
 }

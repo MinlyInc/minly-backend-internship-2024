@@ -1,26 +1,31 @@
-
-import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
-import { AutoTimestamp } from "./auto-time-stamp";
-import { actorMoviesMovie } from "./movie-actor-actor.entity";
-import { Award } from "./award.entity";
-
-
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { actorMoviesMovie } from './movie-actor-actor.entity';
+import { Award } from './award.entity';
 
 @Entity()
-export class MovieActorAward{
-@PrimaryColumn({type:'int4'})
-year:number
+export class MovieActorAward {
+  @PrimaryGeneratedColumn({ type: 'int' })
+  id: number;
+  @Column({ type: 'int4' })
+  year: number;
 
-@Column({type:'varchar'})
-type:string
+  @Column({ type: 'varchar' })
+  type: string;
 
-@Column({type:'varchar'})
-role:string
+  @Column({ type: 'varchar' })
+  role: string;
 
-@ManyToOne(()=> actorMoviesMovie, actorMoviesMovie=> actorMoviesMovie.movieActorAwards)
-actorMoviesMovie : actorMoviesMovie
+  @ManyToOne(
+    () => actorMoviesMovie,
+    (actorMoviesMovie) => actorMoviesMovie.movieActorAwards,
+  )
+  actorMoviesMovie: actorMoviesMovie;
 
-@ManyToOne(()=> Award, award=> award.movieActorAwards)
-award : Award
-
+  @ManyToOne(() => Award, (award) => award.movieActorAwards)
+  award: Award;
 }

@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { MovieActorService } from './movie-actor.service';
 import { MovieActorController } from './movie-actor.controller';
 import { MovieActorAward } from 'src/Entites/movie-actor-award.entity';
-import { Movie } from 'src/Entites/movie.entity';
 import { Actor } from 'src/Entites/actor.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { actorMoviesMovie } from 'src/Entites/movie-actor-actor.entity';

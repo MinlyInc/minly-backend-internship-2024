@@ -6,10 +6,7 @@ import { AppService } from './app.service';
 import { HealthModule } from './health/health.module';
 import { MovieModule } from './movie/movie.module';
 import typeorm from './config/typeorm';
-import { MovieController } from './movie/movie.controller';
-import { MovieService } from './movie/movie.service';
 import { DirectorModule } from './director/director.module';
-import { RouterModule } from '@nestjs/core';
 import { ActorModule } from './actor/actor.module';
 import { WriterModule } from './writer/writer.module';
 import { MovieActorModule } from './movie-actor/movie-actor.module';
@@ -25,17 +22,6 @@ import { MovieActorModule } from './movie-actor/movie-actor.module';
         configService.get('typeorm'),
     }),
 MovieModule,
-    // RouterModule.register([
-    //   {
-    //     path: 'movie',
-    //     module: MovieModule,
-    //     children:[
-    //       {
-    //         path:'movie/:id'
-    //       }
-    //     ]
-    //   },
-    // ]),
     
     HealthModule,
     DirectorModule,

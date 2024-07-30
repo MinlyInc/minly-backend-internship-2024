@@ -1,4 +1,4 @@
-import { IsString, IsEnum, IsOptional, IsDate, IsNumber, IsUUID, IsNotEmpty } from 'class-validator';
+import { IsString, IsEnum, IsOptional, IsNumber,IsNotEmpty } from 'class-validator';
 import { Gender } from '../../Entites/gender.enum';
 
 

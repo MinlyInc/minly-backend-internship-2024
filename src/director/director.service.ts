@@ -1,4 +1,3 @@
-import { query } from 'express';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Director } from 'src/Entites/director.entity';
@@ -17,7 +16,7 @@ export class DirectorService {
    return this.directorRepository.save(director)
    }
 
-   async findAllDirector():Promise<Director[]>{
+   async findAllDirectors():Promise<Director[]>{
       return this.directorRepository.find()
    }
 }
