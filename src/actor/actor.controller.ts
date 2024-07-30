@@ -17,9 +17,9 @@ export class ActorController {
     return this.actorService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.actorService.findOne(+id);
+  @Get(':uuid')
+  findOne(@Param('uuid') uuid: string) {
+    return this.actorService.findOne(uuid);
   }
 
   @Patch(':id')

@@ -1,3 +1,5 @@
+import { ActorDto } from "./actor.dto";
+
 export class CreateMovieDto {
     release_date: Date;
     title: string;
@@ -5,11 +7,12 @@ export class CreateMovieDto {
     average_rating?: number;
     trailer?: string;
     directorId: string;
-    actorIds: string[];
+    actorDetails: { actorId: number; characterName: string }[];
     duration?: string;
     overview?: string;
     language?: string;
     genres?: string[];
     writerId?:string;
+    actors: ActorDto[];
   }
   

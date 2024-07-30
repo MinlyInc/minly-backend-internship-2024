@@ -1,6 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, BeforeInsert } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, BeforeInsert, OneToMany } from 'typeorm';
 import { Movie } from './movie.entity';
 import { v4 as uuidv4 } from 'uuid';
+import { MovieActor } from './movie_actor.entity';
+import { MovieAward } from './movie_award.entity';
 
 
 @Entity()
@@ -41,8 +43,8 @@ export class Actor {
   @UpdateDateColumn({ type: 'timestamptz' })
   updated_at: Date;
 
-  @ManyToMany(() => Movie, movie => movie.actors)
-  movies: Movie[];
+  @OneToMany(() => MovieActor, (movieActor) => movieActor.actor)
+  movieActor: MovieActor[];
 
   @BeforeInsert()
   generateUUID() {

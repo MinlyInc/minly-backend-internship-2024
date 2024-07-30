@@ -1,8 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, ManyToOne, JoinColumn, BeforeInsert } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, ManyToOne, JoinColumn, BeforeInsert, OneToMany } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { Director } from './director.entity';
 import { Actor } from './actor.entity';
 import { Festival } from './festival.entity';
+import { MovieActor } from './movie_actor.entity';
+import { MovieAward } from './movie_award.entity';
 
 
 @Entity()
@@ -54,14 +56,9 @@ export class Movie {
   @JoinColumn({ name: 'writer_id' })
   writer: Director;
 
-  @ManyToMany(() => Actor, actor => actor.movies)
-  @JoinTable({
-    name: 'movie_actor',
-    joinColumn: { name: 'movie_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'actor_id', referencedColumnName: 'id' },
-  })
-  actors: Actor[];
-
+  @OneToMany(() => MovieActor, movieActor => movieActor.movie)
+  movieActor: MovieActor[];
+  
   @ManyToMany(() => Festival, festival => festival.movies)
   festivals: Festival[];
 

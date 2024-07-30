@@ -8,6 +8,8 @@ import { MovieModule } from './movie/movie.module';
 import { DirectorModule } from './director/director.module';
 import { ActorModule } from './actor/actor.module';
 import { FestivalModule } from './festival/festival.module';
+import { MovieActorModule } from './movie_actor/movie_actor.module';
+import { MovieAwardsModule } from './movie_awards/movie_awards.module';
 import typeorm from './config/typeorm';
 
 
@@ -25,6 +27,8 @@ import typeorm from './config/typeorm';
     DirectorModule,
     ActorModule,
     FestivalModule,
+    MovieActorModule,
+    MovieAwardsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
