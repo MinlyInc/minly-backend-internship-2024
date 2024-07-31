@@ -8,4 +8,5 @@ export class UpdateMovieDto extends PartialType(CreateMovieDto) {
   genres?: string[];
   writerId?: string;
   actors?: ActorDto[];
+
 }

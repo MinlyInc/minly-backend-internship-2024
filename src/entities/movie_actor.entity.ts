@@ -1,13 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, ManyToMany } from "typeorm";
 import { Actor } from "./actor.entity";
 import { Movie } from "./movie.entity";
 import { MovieAward } from './movie_award.entity';
+import { BaseEntity } from "./base.entity";
 
 @Entity()
-export class MovieActor {
-
-    @PrimaryGeneratedColumn()
-    id: number;
+export class MovieActor extends BaseEntity {
 
     @Column({ nullable: true })
     characterName: string;

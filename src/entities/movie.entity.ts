@@ -1,17 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, ManyToOne, JoinColumn, BeforeInsert, OneToMany } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
+import { Entity, Column, ManyToMany, ManyToOne, JoinColumn, OneToMany, JoinTable } from 'typeorm';
 import { Director } from './director.entity';
-import { Actor } from './actor.entity';
 import { Festival } from './festival.entity';
 import { MovieActor } from './movie_actor.entity';
-import { MovieAward } from './movie_award.entity';
+import { BaseEntityUUID } from './base.entity.uuid';
 
 
 @Entity()
-export class Movie {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Movie extends BaseEntityUUID {
   @Column({ type: 'timestamptz' })
   release_date: Date;
 
@@ -23,15 +18,6 @@ export class Movie {
 
   @Column({ type: 'float', nullable: true })
   average_rating: number;
-
-  @CreateDateColumn({ type: 'timestamptz' })
-  created_at: Date;
-
-  @UpdateDateColumn({ type: 'timestamptz' })
-  updated_at: Date;
-
-  @Column({ unique: true, type: 'uuid' })
-  uuid: string;
 
   @Column({ nullable: true })
   trailer: string;
@@ -62,10 +48,5 @@ export class Movie {
   @ManyToMany(() => Festival, festival => festival.movies)
   festivals: Festival[];
 
-  @BeforeInsert()
-  generateUUID() {
-    if (!this.uuid) {
-      this.uuid = uuidv4();
-    }
-  }
+  
 }

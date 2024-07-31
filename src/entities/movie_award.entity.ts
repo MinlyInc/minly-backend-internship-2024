@@ -1,10 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column,ManyToMany, JoinTable } from 'typeorm';
 import { MovieActor } from './movie_actor.entity';
+import { BaseEntity } from './base.entity';
 
 @Entity()
-export class MovieAward {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class MovieAward extends BaseEntity{
 
   @Column()
   awardName: string;

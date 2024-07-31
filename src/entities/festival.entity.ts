@@ -1,26 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, BeforeInsert } from 'typeorm';
+import { Entity, Column, ManyToMany, JoinTable } from 'typeorm';
 import { Movie } from './movie.entity';
-import { v4 as uuidv4 } from 'uuid';
+import { BaseEntityUUID } from './base.entity.uuid';
 
 @Entity()
-export class Festival {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Festival extends BaseEntityUUID {
   @Column()
   title: string;
 
   @Column({ type: 'date' })
   date: Date;
-
-  @Column({ unique: true })
-  uuid: string;
-
-  @CreateDateColumn({ type: 'timestamptz' })
-  created_at: Date;
-
-  @UpdateDateColumn({ type: 'timestamptz' })
-  updated_at: Date;
 
   @ManyToMany(() => Movie, movie => movie.festivals)
   @JoinTable({
@@ -30,10 +18,4 @@ export class Festival {
   })
   movies: Movie[];
 
-  
-  @BeforeInsert()
-  generateUUID() {
-    this.uuid = uuidv4();
-  }
-  
 }
