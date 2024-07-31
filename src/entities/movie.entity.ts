@@ -3,6 +3,7 @@ import { Director } from './director.entity';
 import { Festival } from './festival.entity';
 import { MovieActor } from './movie_actor.entity';
 import { BaseEntityUUID } from './base.entity.uuid';
+import { Genre } from './genre.entity';
 
 
 @Entity()
@@ -31,9 +32,6 @@ export class Movie extends BaseEntityUUID {
   @Column({nullable:true})
   language:string;
 
-  @Column("text", { array: true, default: [] })
-  genres: string[];
-
   @ManyToOne(() => Director, director => director.movies)
   @JoinColumn({ name: 'director_id' })
   director: Director;
@@ -48,5 +46,7 @@ export class Movie extends BaseEntityUUID {
   @ManyToMany(() => Festival, festival => festival.movies)
   festivals: Festival[];
 
-  
+  @ManyToMany(() => Genre)
+  @JoinTable()
+  genres: Genre[];
 }

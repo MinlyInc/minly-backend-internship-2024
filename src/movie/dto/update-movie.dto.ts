@@ -5,8 +5,7 @@ import { ActorDto } from './actor.dto';
 export class UpdateMovieDto extends PartialType(CreateMovieDto) {
   directorId?: string;
   actorIds?: string[];
-  genres?: string[];
   writerId?: string;
   actors?: ActorDto[];
-
+  genreIds?: number[];
 }

@@ -11,8 +11,8 @@ export class CreateMovieDto {
     duration?: string;
     overview?: string;
     language?: string;
-    genres?: string[];
     writerId?:string;
     actors: ActorDto[];
+    genreIds: number[];
   }
   
