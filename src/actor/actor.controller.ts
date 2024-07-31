@@ -8,7 +8,7 @@ export class ActorController {
   constructor(private readonly actorService: ActorService) {}
 
   @Get(':uuid')
-  findActorByUuid(@Param('uuid') uuid: UUID): Promise<ActorDto> {
-    return this.actorService.findActorByUuid(uuid);
+  findActorByUuid(@Param('uuid') uuid: string): Promise<ActorDto> {
+    return this.actorService.getActor(uuid);
   }
 }

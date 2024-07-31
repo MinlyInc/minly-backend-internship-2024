@@ -15,8 +15,8 @@ export class Award {
   name: string;
 
   @Generated("uuid")
-  @Column("uuid")
-  uuid: UUID;
+  @Column({ type: 'varchar'})
+  uuid: string;
 
   @OneToMany(() => AwardMovieActor, awardMovieActor => awardMovieActor.actor)
   awardsMovieActor: AwardMovieActor[];

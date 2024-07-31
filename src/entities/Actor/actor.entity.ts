@@ -35,9 +35,9 @@ export class Actor {
   @Column({ type: "timestamptz"})
   updated_at: Date;
 
-  @Column("uuid")
+  @Column({ type: 'varchar'})
   @Generated("uuid")
-  uuid: UUID;
+  uuid: string;
 
   @Column({type: "varchar", nullable: true})
   picture: string;

@@ -38,7 +38,7 @@ export class MovieDto {
 
   @IsOptional()
   @IsString({ each: true })
-  actors?: { name: string; character: string; photo: string, uuid: UUID }[];
+  actors?: { name: string; character: string; photo: string, uuid: string }[];
 
   @IsOptional()
   @IsString({ each: true })

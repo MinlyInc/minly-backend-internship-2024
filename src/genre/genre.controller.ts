@@ -8,6 +8,6 @@ export class GenreController {
 
   @Get()
   findAll(): Promise<Genre[]> {
-    return this.genreService.findAll();
+    return this.genreService.getAll();
   }
 }

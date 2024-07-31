@@ -15,7 +15,7 @@ export class Festival {
   @Column({ type: "date"})
   date: Date;
 
-  @Column("uuid")
+  @Column({ type: 'varchar'})
   @Generated("uuid")
   uuid: UUID;
 

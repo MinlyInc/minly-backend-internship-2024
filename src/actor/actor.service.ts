@@ -12,7 +12,7 @@ export class ActorService {
     private readonly actorRepository: Repository<Actor>,
   ) {}
 
-  async findActorByUuid(uuid: UUID): Promise<ActorDto> {
+  async getActor(uuid: string): Promise<ActorDto> {
     try {
       const actor = await this.actorRepository.findOne({
         where: { uuid: uuid },

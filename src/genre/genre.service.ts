@@ -10,7 +10,7 @@ export class GenreService {
     private readonly genreRepository: Repository<Genre>,
   ) {}
 
-  async findAll(): Promise<Genre[]> {
+  async getAll(): Promise<Genre[]> {
     return await this.genreRepository.find();
   }
 }

@@ -42,8 +42,8 @@ export class Movie {
   updated_at: Date;
   
   @Generated("uuid")
-  @Column("uuid")
-  uuid: UUID;
+  @Column({ type: 'varchar'})
+  uuid: string;
 
   @ManyToOne(() => Director, (director) => director.movies, {nullable: true})
   director: Director;

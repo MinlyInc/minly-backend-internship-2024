@@ -16,11 +16,11 @@ export class MovieController {
     @Query('genreId') genreId: string
   ){
     const { page, limit } = paginationQuery;
-    return this.movieService.findMovies(page, limit, sort, search, genreId);
+    return this.movieService.getMovies(page, limit, sort, search, genreId);
   }
 
   @Get("details/:id")
-  findSelectedMovie(@Param('id') id: UUID,){
-    return this.movieService.findSelectedMovie(id);
+  getSelectedMovie(@Param('id') id: string,){
+    return this.movieService.getSelectedMovie(id);
   }
 }

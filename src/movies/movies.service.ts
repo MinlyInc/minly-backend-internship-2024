@@ -12,7 +12,7 @@ export class MovieService {
     private readonly movieRepository: Repository<Movie>,
   ) {}
 
-  async findMovies(page: number, limit: number, sort: string, search: string, genre: string): Promise<{ movies: MovieDto[], total: number }> {
+  async getMovies(page: number, limit: number, sort: string, search: string, genre: string): Promise<{ movies: MovieDto[], total: number }> {
     try {
       console.log(page, limit, sort);
       const sortOptions = {
@@ -58,7 +58,7 @@ export class MovieService {
     }
   }
 
-  async findSelectedMovie(uuid: UUID): Promise<{ movie: MovieDto }> {
+  async getSelectedMovie(uuid: string): Promise<{ movie: MovieDto }> {
     try {
       const movie = await this.movieRepository.findOne({
         where: { uuid: uuid },

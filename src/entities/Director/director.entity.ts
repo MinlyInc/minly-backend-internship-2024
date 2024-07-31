@@ -39,7 +39,7 @@ export class Director {
   @Column({ type: "timestamptz"})
   updated_at: Date;
 
-  @Column("uuid")
+  @Column({ type: 'varchar'})
   @Generated("uuid")
   uuid: UUID;
 
