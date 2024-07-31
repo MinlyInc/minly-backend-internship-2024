@@ -90,14 +90,14 @@ export class MovieService {
       duration,
       description,
       director: director ? `${director.first_name} ${director.last_name}` : null,
-      actors: movieActors ? movieActors.map(ma => ({
+      actors: movieActors.length ? movieActors.map(ma => ({
         name: `${ma.actor.first_name} ${ma.actor.last_name}`,
-        character: ma.character,
-        photo: ma.actor.picture,
-        uuid: ma.actor.uuid
+        character: ma?.character,
+        photo: ma?.actor?.picture,
+        uuid: ma?.actor?.uuid
       })) : [],      
-      festivals: festivals ? festivals.map(festival => festival.title) : [],
-      genres: movieGenres ? movieGenres.map(mg => mg.genre.name) : [],
+      festivals: festivals.length ? festivals.map(festival => festival.title) : [],
+      genres: movieGenres.length ? movieGenres.map(mg => mg.genre.name) : [],
     };
   }
 }

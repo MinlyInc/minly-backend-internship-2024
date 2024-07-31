@@ -1,9 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Actor } from '../entities/Actor/actor.entity';
 import { ActorDto} from '../entities/Actor/dto/actor.dto';
-import { UUID } from 'crypto';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ActorService {
@@ -18,14 +17,10 @@ export class ActorService {
         where: { uuid: uuid },
         relations: ['movieActors', 'movieActors.movie', 'awardsMovieActor', 'awardsMovieActor.award', 'awardsMovieActor.movie'],
       });
-      if (!actor) {
-        throw new Error('Actor not found');
-      }
       return this.toActorDto(actor);
     } 
     catch (error) {
-      console.error(error);
-      throw error;
+      throw new BadRequestException(error);
     }
   }
 
@@ -45,16 +40,16 @@ export class ActorService {
       number_of_awards,
       created_at,
       updated_at,
-      movies: movieActors ? movieActors.map(ma => ({
-        title: ma.movie.title,
-        character: ma.character,
+      movies: movieActors?.length ? movieActors.map(ma => ({
+        title: ma?.movie?.title,
+        character: ma?.character,
       })) : [],
-      awards: awardsMovieActor ? awardsMovieActor.map(award => ({
+      awards: awardsMovieActor.length ? awardsMovieActor.map(award => ({
         name: award.award.name,
         title: award.title,
-        description: award.description,
-        movie: award.movie,
-        poster: award.movie.poster
+        description: award?.description,
+        movie: award?.movie,
+        poster: award?.movie?.poster
       })): [],
     };
   }
