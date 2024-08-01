@@ -17,10 +17,6 @@ export class DirectorService {
     return this.directorRepository.save(director);
   }
 
-  findAll() {
-    return this.directorRepository.find();
-  }
-
   findOne(id: number) {
     return this.directorRepository.findOne({ where: { id } });
   }

@@ -23,10 +23,6 @@ export class ActorService {
     return this.actorRepository.save(actor);
   }
 
-  findAll() {
-    return this.actorRepository.find({});
-  }
-
   async findOne(uuid: string) {
     const actor = await this.actorRepository.findOne({ where: { uuid }, relations: ['movieActor', 'movieActor.movie', 'movieActor.awards'] });
     

@@ -12,11 +12,6 @@ export class DirectorController {
     return this.directorService.create(createDirectorDto);
   }
 
-  @Get()
-  findAll() {
-    return this.directorService.findAll();
-  }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.directorService.findOne(+id);

@@ -12,11 +12,6 @@ export class MovieAwardController {
     return this.movieAwardService.create(createMovieAwardDto);
   }
 
-  @Get()
-  findAll() {
-    return this.movieAwardService.findAll();
-  }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.movieAwardService.findOne(+id);

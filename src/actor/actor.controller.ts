@@ -12,11 +12,6 @@ export class ActorController {
     return this.actorService.create(createActorDto);
   }
 
-  @Get()
-  findAll() {
-    return this.actorService.findAll();
-  }
-
   @Get(':uuid')
   findOne(@Param('uuid') uuid: string) {
     return this.actorService.findOne(uuid);
