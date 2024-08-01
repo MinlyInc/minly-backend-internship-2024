@@ -104,7 +104,7 @@ export class MovieService {
   }
 
   async findOne(id: number) {
-    const movie = await this.movieRepository.findOne({ where: { id }, relations: ['director', 'movieActor', 'movieActor.actor', 'writer'] });
+    const movie = await this.movieRepository.findOne({ where: { id }, relations: ['director', 'movieActor', 'movieActor.actor', 'writer', 'genres'] });
     if (!movie) {
       throw new Error('Movie not found');
     }
