@@ -16,7 +16,7 @@ export class MovieAwardService {
   ) {}
 
   async create(createMovieAwardDto: CreateMovieAwardDto) {
-    // TODO @Eweida create a new repository function findByActorUids and use it here
+    // TODO @Ewida create a new repository function findByActorUids and use it here
     const movieActors = await this.movieActorRepository.findByIds(createMovieAwardDto.movieActorIds);
     const movieAward = this.movieAwardRepository.create({
       ...createMovieAwardDto,
